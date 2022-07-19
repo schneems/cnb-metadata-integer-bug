@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+layers_dir="${1}"
+
+test_layer_dir="${layers_dir}/test"
+test_layer_toml="${test_layer_dir}.toml"
+
+mkdir -p "${test_layer_dir}"
+
+if [[ -f "${test_layer_toml}" ]]; then
+    echo "Existing layer TOML contents:"
+    cat "${test_layer_toml}"
+fi
+
+cat > "${test_layer_toml}" << EOF
+[types]
+launch = true
+build = true
+cache = true
+
+[metadata]
+version = 1
+EOF
